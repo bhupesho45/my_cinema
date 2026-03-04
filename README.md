@@ -5,9 +5,10 @@ It also includes **admin functionality** for managing movies and shows.
 
 This project demonstrates **full-stack web development using Python, Flask, MySQL, HTML, and CSS**.
 
----
+----
+----
 
-# 🚀 Features
+# 🚀 Feature
 
 ### 👤 User Features
 
@@ -279,3 +280,6 @@ This project was built to practice:
 * Authentication systems
 * Session management
 * Full web application architecture
+---------------------------------------------
+NOTE:check and change the versions according to latest update 
+---------------------------------------------
