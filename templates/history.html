@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCinema - Booking History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url('/static/images/abstract-halftone-bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center font-sans">
+    <div class="w-full max-w-5xl p-8">
+        <header class="flex justify-between items-center mb-8">
+            <h1 class="text-4xl font-extrabold text-[#222] drop-shadow-lg">Booking History</h1>
+            <nav>
+                <a href="{{ url_for('movies') }}" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-full mr-2 shadow-md transition duration-300">Back to Movies</a>
+                <a href="{{ url_for('logout') }}" class="bg-teal-400 hover:bg-teal-500 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Logout</a>
+            </nav>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% if bookings %}
+                {% for booking in bookings %}
+                    <div class="backdrop-blur-md bg-white/80 border border-orange-200 shadow-lg p-6 rounded-2xl flex">
+                        <img src="{{ url_for('static', filename='movie_images/' + booking.poster_url) }}" alt="{{ booking.movie_title }}" onerror="this.onerror=null;this.src='https://placehold.co/100x150/1f2937/d1d5db?text=No+Image';" class="w-24 h-36 object-cover rounded-lg mr-4 border border-orange-100">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-1 text-[#222]">{{ booking.movie_title }}</h2>
+                            <p class="text-orange-500 text-lg font-semibold">{{ booking.theater_name }}</p>
+                            <p class="text-gray-600 text-sm mb-2">{{ booking.showtime.strftime('%b %d, %Y at %I:%M %p') }}</p>
+                            <ul class="text-gray-700 text-sm list-disc list-inside">
+                                <li>Seats: {{ booking.seats_booked }}</li>
+                                <li>Total Price: ₹{{ booking.total_price }}</li>
+                                <li>Booked On: {{ booking.booking_date.strftime('%b %d, %Y at %I:%M %p') }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center text-gray-500 col-span-full">You have no booking history.</p>
+            {% endif %}
+        </div>
+    </div>

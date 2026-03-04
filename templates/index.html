@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCinema - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url('/static/images/abstract-halftone-bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="bg-[#FFF4EC] min-h-screen flex items-center justify-center font-sans">
+    <div class="bg-white border border-orange-200 shadow-lg p-10 rounded-2xl w-full max-w-lg text-center backdrop-blur-md">
+        <!-- Icon -->
+        <div class="mb-6 flex justify-center">
+            <div class="bg-orange-500 rounded-full p-4 shadow-md">
+                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M4 7V6a2 2 0 012-2h12a2 2 0 012 2v1M4 7v10a2 2 0 002 2h12a2 2 0 002-2V7M4 7h16"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-4xl font-extrabold text-[#222] mb-4">Welcome to MyCinema!</h1>
+        <p class="text-gray-600 mb-6">Your one-stop destination for the latest movies.</p>
+        <p class="text-xl mb-6 text-gray-700">Please log in or register to continue.</p>
+
+        <!-- Buttons -->
+        <div class="flex justify-center gap-4">
+            <a href="{{ url_for('login') }}" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg shadow-md transition duration-300">Login</a>
+            <a href="{{ url_for('register') }}" class="bg-teal-400 hover:bg-teal-500 text-white font-bold py-2 px-6 rounded-lg shadow-md transition duration-300">Register</a>
+        </div>

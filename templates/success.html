@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Successful</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url('/static/images/abstract-halftone-bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .glitter {
+            background: linear-gradient(90deg, #fb923c 20%, #fbbf24 50%, #06b6d4 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            animation: shimmer 2.5s infinite linear;
+            background-size: 200% 100%;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .sparkle {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+            opacity: 0.7;
+            animation: sparkle 2s infinite alternate;
+        }
+        @keyframes sparkle {
+            0% { transform: scale(1) rotate(0deg);}
+            100% { transform: scale(1.2) rotate(20deg);}
+        }
+    </style>
+</head>
+<body class="bg-[#FFF4EC] min-h-screen flex items-center justify-center font-sans relative overflow-hidden">
+    <!-- Sparkle Stickers -->
+    <svg class="sparkle" style="top: 12%; left: 18%;" viewBox="0 0 24 24" fill="#fb923c"><circle cx="12" cy="12" r="4"/><g opacity="0.5"><circle cx="4" cy="4" r="2"/><circle cx="20" cy="6" r="1.5"/><circle cx="19" cy="19" r="2"/><circle cx="6" cy="20" r="1.5"/></g></svg>
+    <svg class="sparkle" style="top: 80%; left: 80%;" viewBox="0 0 24 24" fill="#06b6d4"><circle cx="12" cy="12" r="3"/><g opacity="0.5"><circle cx="4" cy="18" r="1.5"/><circle cx="20" cy="4" r="2"/></g></svg>
+    <svg class="sparkle" style="top: 60%; left: 10%;" viewBox="0 0 24 24" fill="#fbbf24"><circle cx="12" cy="12" r="2.5"/><g opacity="0.5"><circle cx="18" cy="20" r="1"/><circle cx="6" cy="4" r="1.5"/></g></svg>
+
+    <div class="w-full max-w-lg text-center relative z-10">
+        <h2 class="text-4xl font-extrabold glitter mb-4 drop-shadow-lg tracking-wide">🎉 Booking Successful!</h2>
+        <p class="text-2xl font-bold text-orange-500 mb-4">Your ticket has been booked!</p>
+        <p class="text-lg text-gray-700 mb-8">Check your booking history for details.<br>Enjoy your movie! 🍿</p>
+        <div class="flex justify-center gap-4">
+            <a href="{{ url_for('movies') }}" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg shadow-md transition duration-300">Browse More Movies</a>
+            <a href="{{ url_for('history') }}" class="bg-teal-400 hover:bg-teal-500 text-white font-bold py-2 px-6 rounded-lg shadow-md transition duration-300">View History</a>
+        </div>
+    </div>
+</body>

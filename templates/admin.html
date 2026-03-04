@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCinema - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url('/static/images/abstract-halftone-bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center font-sans">
+    <div class="w-full max-w-3xl p-8">
+        <header class="flex justify-between items-center mb-10">
+            <h1 class="text-4xl font-extrabold text-[#222] drop-shadow-lg">Admin Panel</h1>
+            <a href="{{ url_for('admin_logout') }}" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Logout</a>
+        </header>
+        <div class="backdrop-blur-md bg-white/80 border border-orange-200 shadow-lg rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-8 p-10">
+            <a href="{{ url_for('admin_add_movie') }}" class="flex flex-col items-center justify-center bg-orange-50 hover:bg-orange-100 text-[#222] font-bold py-12 rounded-xl shadow-md transition duration-300 transform hover:scale-105 border border-orange-200">
+                <div class="bg-orange-500 rounded-full p-3 shadow-md mb-3">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M12 4v16m8-8H4"></path>
+                    </svg>
+                </div>
+                <h2 class="text-2xl">Add New Movie</h2>
+            </a>
+            <a href="{{ url_for('admin_add_show') }}" class="flex flex-col items-center justify-center bg-orange-50 hover:bg-orange-100 text-[#222] font-bold py-12 rounded-xl shadow-md transition duration-300 transform hover:scale-105 border border-orange-200">
+                <div class="bg-orange-500 rounded-full p-3 shadow-md mb-3">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M8 12h8M12 8v8"></path>
+                    </svg>
+                </div>
+                <h2 class="text-2xl">Add New Show</h2>
+            </a>
+        </div>
+    </div>

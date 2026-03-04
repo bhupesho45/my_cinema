@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Seats</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url('/static/images/abstract-halftone-bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .seat {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            border: 2px solid #ffedd5;
+            background-color: #fff4ec;
+            color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.18s cubic-bezier(.4,2,.6,1);
+            box-shadow: 0 2px 8px #0002;
+            position: relative;
+        }
+        .seat:hover:not(.occupied):not(.selected) {
+            transform: scale(1.12);
+            border-color: #00bfae;
+            background-color: #ffe6c7;
+            z-index: 2;
+        }
+        .seat.selected {
+            background-color: #fb923c;
+            border-color: #fb923c;
+            color: #fff;
+            box-shadow: 0 0 18px 0 #fb923c80;
+            z-index: 3;
+        }
+        .seat.occupied {
+            background-color: #d1d5db;
+            border-color: #d1d5db;
+            color: #bdbdbd;
+            cursor: not-allowed;
+            opacity: 0.7;
+            text-decoration: line-through;
+        }
+        .seat input[type="checkbox"] {
+            display: none;
+        }
+        .screen-curve {
+            width: 80%;
+            height: 54px;
+            margin: 0 auto 48px auto;
+            background: linear-gradient(90deg, #fb923c 0%, #06b6d4 100%);
+            border-radius: 0 0 120px 120px/0 0 48px 48px;
+            box-shadow: 0 8px 32px 0 #fb923c40;
+            position: relative;
+        }
+        .screen-label {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 2px 8px #fb923c80;
+        }
+        .seat-row-label {
+            font-weight: bold;
+            color: #fb923c;
+            width: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 2px #fff4ec;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin: 32px 0 0 0;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            color: #666;
+        }
+        .legend-seat {
+            width: 22px;
+            height: 22px;
+            border-radius: 5px;
+            border: 2px solid #ffedd5;
+            display: inline-block;
+        }
+        .legend-seat.available {
+            background-color: #fff4ec;
+        }
+        .legend-seat.selected {
+            background-color: #fb923c;
+            border-color: #fb923c;
+        }
+        .legend-seat.occupied {
+            background-color: #d1d5db;
+            border-color: #d1d5db;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center font-sans">
+
+    <div class="bg-white/80 border border-orange-200 shadow-lg p-10 rounded-2xl w-full max-w-2xl relative backdrop-blur-md">
+        <h1 class="text-3xl font-extrabold text-[#222] mb-8 tracking-wide">Select Your Seats</h1>
+        <div class="screen-curve mb-8">
+            <span class="screen-label">Screen</span>
+        </div>
+        <form method="post" action="">
+            <div class="flex flex-col gap-5 seat-map-wrapper">
+                <div class="seat-row flex justify-center gap-4">
+                    <span class="seat-row-label">A</span>
+                    <label class="seat" for="A1"><input type="checkbox" id="A1" name="seats" value="A1">1</label>
+                    <label class="seat" for="A2"><input type="checkbox" id="A2" name="seats" value="A2">2</label>
+                    <label class="seat" for="A3"><input type="checkbox" id="A3" name="seats" value="A3">3</label>
+                    <label class="seat occupied" for="A4"><input type="checkbox" id="A4" name="seats" value="A4" disabled>4</label>
+                    <label class="seat" for="A5"><input type="checkbox" id="A5" name="seats" value="A5">5</label>
+                    <label class="seat" for="A6"><input type="checkbox" id="A6" name="seats" value="A6">6</label>
+                    <label class="seat" for="A7"><input type="checkbox" id="A7" name="seats" value="A7">7</label>
+                    <label class="seat" for="A8"><input type="checkbox" id="A8" name="seats" value="A8">8</label>
+                    <label class="seat" for="A9"><input type="checkbox" id="A9" name="seats" value="A9">9</label>
+                    <label class="seat" for="A10"><input type="checkbox" id="A10" name="seats" value="A10">10</label>
+                    <span class="seat-row-label">A</span>
+                </div>
+                <div class="seat-row flex justify-center gap-4">
+                    <span class="seat-row-label">B</span>
+                    <label class="seat" for="B1"><input type="checkbox" id="B1" name="seats" value="B1">1</label>
+                    <label class="seat" for="B2"><input type="checkbox" id="B2" name="seats" value="B2">2</label>
+                    <label class="seat occupied" for="B3"><input type="checkbox" id="B3" name="seats" value="B3" disabled>3</label>
+                    <label class="seat" for="B4"><input type="checkbox" id="B4" name="seats" value="B4">4</label>
+                    <label class="seat" for="B5"><input type="checkbox" id="B5" name="seats" value="B5">5</label>
+                    <label class="seat" for="B6"><input type="checkbox" id="B6" name="seats" value="B6">6</label>
+                    <label class="seat" for="B7"><input type="checkbox" id="B7" name="seats" value="B7">7</label>
+                    <label class="seat" for="B8"><input type="checkbox" id="B8" name="seats" value="B8">8</label>
+                    <label class="seat occupied" for="B9"><input type="checkbox" id="B9" name="seats" value="B9" disabled>9</label>
+                    <label class="seat" for="B10"><input type="checkbox" id="B10" name="seats" value="B10">10</label>
+                    <span class="seat-row-label">B</span>
+                </div>
+                <div class="seat-row flex justify-center gap-4">
+                    <span class="seat-row-label">C</span>
+                    <label class="seat" for="C1"><input type="checkbox" id="C1" name="seats" value="C1">1</label>
+                    <label class="seat" for="C2"><input type="checkbox" id="C2" name="seats" value="C2">2</label>
+                    <label class="seat" for="C3"><input type="checkbox" id="C3" name="seats" value="C3">3</label>
+                    <label class="seat" for="C4"><input type="checkbox" id="C4" name="seats" value="C4">4</label>
+                    <label class="seat occupied" for="C5"><input type="checkbox" id="C5" name="seats" value="C5" disabled>5</label>
+                    <label class="seat occupied" for="C6"><input type="checkbox" id="C6" name="seats" value="C6" disabled>6</label>
+                    <label class="seat" for="C7"><input type="checkbox" id="C7" name="seats" value="C7">7</label>
+                    <label class="seat" for="C8"><input type="checkbox" id="C8" name="seats" value="C8">8</label>
+                    <label class="seat" for="C9"><input type="checkbox" id="C9" name="seats" value="C9">9</label>
+                    <label class="seat" for="C10"><input type="checkbox" id="C10" name="seats" value="C10">10</label>
+                    <span class="seat-row-label">C</span>
+                </div>
+            </div>
+            <div class="legend mt-8">
+                <div class="legend-item"><span class="legend-seat available"></span> Available</div>
+                <div class="legend-item"><span class="legend-seat selected"></span> Selected</div>
+                <div class="legend-item"><span class="legend-seat occupied"></span> Booked</div>
+            </div>
+            <button type="submit" class="mt-10 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-10 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-orange-200 transition text-lg">
+                Proceed to Payment
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const seats = document.querySelectorAll('.seat input[type="checkbox"]');
+            seats.forEach(seat => {
+                seat.addEventListener('change', function() {
+                    const label = this.closest('label');
+                    if (this.checked) {
+                        label.classList.add('selected');
+                    } else {
+                        label.classList.remove('selected');
+                    }
+                });
+            });
+        });

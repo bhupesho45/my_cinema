@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Add Movie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url('/static/images/abstract-halftone-bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center font-sans">
+    <div class="bg-white/80 border border-orange-200 shadow-lg p-10 rounded-2xl w-full max-w-lg relative backdrop-blur-md">
+        <div class="absolute -top-8 left-1/2 -translate-x-1/2">
+            <div class="bg-orange-500 rounded-full p-3 shadow-md">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 4v16m8-8H4"></path>
+                </svg>
+            </div>
+        </div>
+        <header class="flex flex-col items-center mb-8 mt-4">
+            <h2 class="text-3xl font-extrabold text-[#222] tracking-wide mb-1">Add New Movie</h2>
+            <a href="{{ url_for('movies') }}" class="mt-2 text-orange-500 hover:text-teal-500 underline transition">← Back to Movies</a>
+        </header>
+        {% if msg %}
+            <p class="text-center mb-4 text-teal-600 font-semibold bg-teal-100 rounded py-2">{{ msg }}</p>
+        {% endif %}
+        <form action="{{ url_for('admin_add_movie') }}" method="post" class="space-y-6">
+            <div>
+                <label class="block text-orange-700 text-sm font-semibold mb-2" for="title">Movie Title</label>
+                <input class="w-full px-4 py-2 rounded-lg bg-orange-50 border border-orange-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-[#222] placeholder-orange-400 transition" id="title" name="title" type="text" required placeholder="Enter movie title">
+            </div>
+            <div>
+                <label class="block text-orange-700 text-sm font-semibold mb-2" for="description">Description</label>
+                <textarea class="w-full px-4 py-2 rounded-lg bg-orange-50 border border-orange-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-[#222] placeholder-orange-400 transition h-32 resize-none" id="description" name="description" required placeholder="Enter movie description"></textarea>
+            </div>
+            <div>
+                <label class="block text-orange-700 text-sm font-semibold mb-2" for="poster_url">Poster Filename</label>
+                <input class="w-full px-4 py-2 rounded-lg bg-orange-50 border border-orange-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-[#222] placeholder-orange-400 transition" id="poster_url" name="poster_url" type="text" placeholder="e.g., spiderman_poster.jpg" required>
+            </div>
+            <div class="flex items-center justify-center">
+                <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-8 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-orange-200 transition text-lg" type="submit">
+                    Add Movie
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

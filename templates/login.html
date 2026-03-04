@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCinema - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url('/static/images/abstract-halftone-bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="bg-[#FFF4EC] min-h-screen flex items-center justify-center font-sans">
+    <div class="bg-white/80 border border-orange-200 shadow-lg p-10 rounded-2xl w-full max-w-md backdrop-blur-md">
+        <div class="flex justify-center mb-6">
+            <div class="bg-orange-500 rounded-full p-4 shadow-md">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M16 21v-2a4 4 0 00-8 0v2M12 11a4 4 0 100-8 4 4 0 000 8z"/>
+                </svg>
+            </div>
+        </div>
+        <h2 class="text-3xl font-extrabold text-[#222] text-center mb-6 drop-shadow-lg">Login to MyCinema</h2>
+        
+        {% if msg %}
+            <p class="text-center mb-4 text-red-500">{{ msg }}</p>
+        {% endif %}
+        
+        <form action="{{ url_for('login') }}" method="post" class="space-y-6">
+            <div>
+                <label class="block text-orange-700 text-sm font-semibold mb-2" for="username">Username</label>
+                <input class="w-full px-4 py-2 rounded-lg bg-orange-50 border border-orange-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-[#222] placeholder-orange-400 transition" id="username" name="username" type="text" placeholder="Username" required>
+            </div>
+            <div>
+                <label class="block text-orange-700 text-sm font-semibold mb-2" for="password">Password</label>
+                <input class="w-full px-4 py-2 rounded-lg bg-orange-50 border border-orange-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-[#222] placeholder-orange-400 transition" id="password" name="password" type="password" placeholder="******************" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-orange-200 transition" type="submit">
+                    Login
+                </button>
+                <a class="font-bold text-sm text-teal-500 hover:text-orange-500 transition" href="{{ url_for('register') }}">
+                    Don't have an account? Register
+                </a>
+            </div>
+        </form>
+    </div>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCinema - {{ movie.title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url('/static/images/abstract-halftone-bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="bg-[#FFF4EC] min-h-screen flex items-center justify-center font-sans">
+    <div class="container mx-auto p-8">
+        <header class="flex justify-between items-center mb-8">
+            <a href="{{ url_for('movies') }}" class="text-orange-500 hover:text-teal-500 transition duration-300 flex items-center gap-1 font-bold">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Movies
+            </a>
+            <div class="text-center flex-1">
+                <h1 class="text-4xl font-extrabold text-[#222]">{{ movie.title }}</h1>
+            </div>
+            <nav>
+                <a href="{{ url_for('logout') }}" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">Logout</a>
+            </nav>
+        </header>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="bg-teal-400 text-white p-4 rounded-lg mb-6 text-center font-semibold shadow-md">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="backdrop-blur-md bg-white/80 border border-orange-200 shadow-lg p-8 rounded-2xl mb-8 flex flex-col md:flex-row items-center">
+            <img src="{{ url_for('static', filename='movie_images/' + movie.poster_url) }}" alt="{{ movie.title }}" onerror="this.onerror=null;this.src='https://placehold.co/400x600/1f2937/d1d5db?text=No+Image';" class="w-full md:w-1/4 h-auto rounded-lg mb-4 md:mb-0 md:mr-8 shadow-lg border border-orange-100">
+            <div class="text-center md:text-left flex-1">
+                <h2 class="text-2xl font-bold mb-2 text-[#222]">{{ movie.title }}</h2>
+                <p class="text-gray-600 mb-4">{{ movie.description }}</p>
+                {% if is_admin %}
+                    <a href="{{ url_for('admin_add_show') }}" class="mt-4 inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300">Add New Show for this movie</a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <h2 class="text-3xl font-bold text-[#222] mb-6 text-center">Available Showtimes</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% if shows %}
+                {% for show in shows %}
+                <div class="bg-white/80 border border-orange-200 p-6 rounded-2xl shadow-lg flex flex-col justify-between hover:scale-105 transition duration-300">
+                    <div>
+                        <h3 class="text-xl font-bold text-[#222] mb-1">{{ show.theater_name }}</h3>
+                        <p class="text-orange-500 text-sm mb-2">{{ show.theater_location }}</p>
+                        <p class="text-lg font-bold text-teal-500 mb-1">{{ show.showtime.strftime('%b %d, %Y %I:%M %p') }}</p>
+                        <p class="text-gray-700 mb-4">Price: ₹{{ show.price }}</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <a href="{{ url_for('book_seats', show_id=show.show_id) }}" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-5 rounded-full shadow-md transition duration-300">Book Seats</a>
+                        {% if is_admin %}
+                            <form action="{{ url_for('admin_remove_show', show_id=show.show_id) }}" method="post" class="inline-block">
+                                <button type="submit" onclick="return confirm('Are you sure you want to remove this show? This will also delete all associated bookings.');" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-5 rounded-full shadow-md transition duration-300">
+                                    Remove
+                                </button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center text-gray-500 col-span-full">No shows available for this movie.</p>
+            {% endif %}
